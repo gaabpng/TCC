@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>Caixa d'água</title>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/paho-mqtt.min.js"
+        type="text/javascript"></script>
+    <script>
+        // Conexão WebSocket com o ESP32
+        var socket = new WebSocket("ws://endereco_do_seu_esp32");
+
+        socket.onopen = function () {
+            console.log("Conexão WebSocket estabelecida.");
+        };
+
+        socket.onmessage = function (event) {
+            var mensagem = event.data;
+            console.log("Mensagem recebida: " + mensagem);
+
+            // Atualiza o conteúdo da div com a mensagem recebida
+            document.getElementById("mensagem").textContent = mensagem;
+        };
+
+        socket.onclose = function () {
+            console.log("Conexão WebSocket fechada.");
+        };
+    </script>
+</head>
+
+<body>
+    <div id="header">
+        <h1>
+            IF Resources
+        </h1>
+        <a href="index.html">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Instituto_Federal_Marca_2015.svg/640px-Instituto_Federal_Marca_2015.svg.png"
+                alt="Logo Instituto Federal" width="128" height="168">
+        </a>
+    </div>
+    <div id="rodape">
+        <h3>
+            Gabriel Sales </br> Michael Monteiro de Lima </br></br>2020.1 / 2023.1 (se Deus quiser)
+        </h3>
+    </div>
+
+</body>
+
+</html>

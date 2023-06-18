@@ -3,10 +3,10 @@ let mqttClient;
 window.addEventListener("load", (event) => {
   connectToBroker();
 
-  const publishBtn = document.querySelector(".publish");
-  publishBtn.addEventListener("click", function () {
-    publishMessage();
-  });
+  // const publishBtn = document.querySelector(".publish");
+  //  publishBtn.addEventListener("click", function () {
+  //   publishMessage();
+ // });
 });
 
 function connectToBroker() {
@@ -19,7 +19,7 @@ function connectToBroker() {
     keepalive: 60,
     clientId: clientId,
     protocolId: "MQTT",
-    protocolVersion: 4,
+    protocolVersion: 5,
     clean: true,
     reconnectPeriod: 1000,
     connectTimeout: 30 * 1000,
@@ -48,11 +48,11 @@ function connectToBroker() {
   });
 }
 
-function publishMessage() {
-  const messageInput = document.querySelector("#message");
+function publishMessage(msg) {
+  // const messageInput = document.querySelector("#message");
 
-  const topic = document.querySelector("#topic").value.trim();
-  const message = messageInput.value.trim();
+  const topic = "tcc_ifresources_sendraw_manage";
+  const message = msg;
 
   console.log(`Sending Topic: ${topic}, Message: ${message}`);
 
@@ -60,5 +60,9 @@ function publishMessage() {
     qos: 0,
     retain: false,
   });
-  messageInput.value = "";
+  // messageInput.value = "";
+}
+
+function desligarTrem(){
+  publishMessage("P0");
 }

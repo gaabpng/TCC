@@ -3,16 +3,19 @@ let mqttClient;
 window.addEventListener("load", (event) => {
   connectToBroker();
 
-  const subscribeBtn = document.querySelector("#subscribe");
-  subscribeBtn.addEventListener("click", function () {
-    subscribeToTopic();
-  });
+//   const subscribeBtn = document.querySelector("#subscribe");
+//   subscribeBtn.addEventListener("click", function () {
+//     subscribeToTopic();
+//   });
 
-  const unsubscribeBtn = document.querySelector("#unsubscribe");
-  unsubscribeBtn.addEventListener("click", function () {
-    unsubscribeToTopic();
-  });
+//   const unsubscribeBtn = document.querySelector("#unsubscribe");
+//   unsubscribeBtn.addEventListener("click", function () {
+//     unsubscribeToTopic();
+//   });
+  setInterval(subscribeToTopic, 10000);
+
 });
+
 
 function connectToBroker() {
   const clientId = "client" + Math.random().toString(36).substring(7);
@@ -50,19 +53,19 @@ function connectToBroker() {
     console.log(
       "Received Message: " + message.toString() + "\nOn topic: " + topic
     );
-    const messageTextArea = document.querySelector("#message");
-    messageTextArea.value += message + "\r\n";
+    const messageTextArea = document.querySelector("#humidade");
+    messageTextArea.innerHTML = message += "\r\n"; //tirei o+= e botei só +
   });
 }
 
 function subscribeToTopic() {
   const status = document.querySelector("#status");
-  const topic = document.querySelector("#topic").value.trim();
+  const topic = "tcc_ifresources_humd";
   console.log(`Subscribing to Topic: ${topic}`);
 
-  mqttClient.subscribe(topic, { qos: 0 });
-  status.style.color = "green";
-  status.value = "SUBSCRIBED";
+   mqttClient.subscribe(topic, { qos: 0 });
+//   status.style.color = "green";
+//   status.value = "SUBSCRIBED";
 }
 
 function unsubscribeToTopic() {
@@ -70,7 +73,7 @@ function unsubscribeToTopic() {
   const topic = document.querySelector("#topic").value.trim();
   console.log(`Unsubscribing to Topic: ${topic}`);
 
-  mqttClient.unsubscribe(topic, { qos: 0 });
-  status.style.color = "red";
-  status.value = "UNSUBSCRIBED";
+    mqttClient.unsubscribe(topic, { qos: 0 });
+//   status.style.color = "red";
+//   status.value = "UNSUBSCRIBED";
 }

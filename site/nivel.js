@@ -53,14 +53,14 @@ function connectToBroker() {
     console.log(
       "Received Message: " + message.toString() + "\nOn topic: " + topic
     );
-    const messageTextArea = document.querySelector("#temperatura");
+    const messageTextArea = document.querySelector("#nivel");
     messageTextArea.innerHTML = message += "\r\n"; //tirei o+= e botei só +
   });
 }
 
 function subscribeToTopic() {
   const status = document.querySelector("#status");
-  const topic = "tcc_ifresources_temp";
+  const topic = "tcc_ifresources_nivel";
   console.log(`Subscribing to Topic: ${topic}`);
 
   mqttClient.subscribe(topic, { qos: 0 });
